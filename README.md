@@ -6,7 +6,10 @@ ___
 ### setup (macOS):
 1. make sure you have **ruby** installed by running `$ ruby --version` in your terminal
 2. install **[homebrew](https://brew.sh/)**, a package manager for macOS
-  - paste `$ /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"` into your terminal and hit *Enter*
+  - paste the following line into your terminal and hit *Enter*
+  ```bash
+  $ /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+  ```
 3. install **[Xcode](https://itunes.apple.com/de/app/xcode/id497799835?mt=12)** developer tools via AppStore  
 4. install **node js** via homebrew by running `$ brew install node`
   - this will also install **npm** the node package manager
