@@ -20,3 +20,6 @@ ___
   - run `$ git clone https://github.com/BastianA/storey.git`
   - hop into your freshly created project via `$ cd storey`
 6. run `$ npm install` to install all dependencies
+
+### run the app
+- run `$ ng serve` to start a local web server on [localhost:4200](http://localhost:4200/)
