@@ -1,4 +1,4 @@
-# storey
+# security
 A happy place for sharing awesome stuff!
 
 ___
@@ -17,8 +17,8 @@ ___
 5. use **git** to clone this project to your local system
   - install git with homebrew `$ brew install git`
   - navigate to a desired directory (eg. /Users/bastian/Documents) with your terminal
-  - run `$ git clone https://github.com/BastianA/storey.git`
-  - hop into your freshly created project via `$ cd storey`
+  - run `$ git clone https://github.com/BastianA/security.git`
+  - hop into your freshly created project via `$ cd security`
 6. run `$ npm install` to install all dependencies
 
 ### run the app

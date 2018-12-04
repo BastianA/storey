@@ -1,0 +1,40 @@
+<section *ngIf="!preloadReady" id="loader">
+  …loading
+</section>
+<section *ngIf="preloadReady" id="player">
+  <!-- Active Cam -->
+  <video preload="auto" #player>
+    <source [src]="currentCam.src" type='video/{{EXT}}; codecs="{{CODEC}}"'>
+      Sorry – Dein Browser unterstützt kein WebM (Codec: VP8/VP9) oder MP4 (Codec: H.264) HTML5 Video.
+  </video>
+  <!-- Controls -->
+  <div class="controls">
+    <div class="controlsGroup">
+      <button class="controlsBtn" (click)="togglePlayState()">
+        <i *ngIf="playState.paused" class="controlsIcn material-icons">play_arrow</i>
+        <i *ngIf="playState.playing" class="controlsIcn material-icons">pause</i>
+      </button>
+      <button class="controlsBtn">
+        <i class="controlsIcn material-icons">volume_up</i>
+      </button>
+    </div>
+    <div class="controlsGroup">
+      <button class="controlsBtn" (click)="toggleCamSwitcher()">
+        <i class="controlsIcn material-icons">view_comfy</i>
+      </button>
+      <button class="controlsBtn">
+        <i class="controlsIcn material-icons">fullscreen</i>
+      </button>
+    </div>
+  </div>
+  <!-- Cam Switcher -->
+  <div class="switcher" [hidden]="!camSwitcherVisible">
+    <video *ngFor="let cam of cams"
+            id="{{ cam.name }}"
+            (click)="setActiveCam(cam.name)"
+            class="preview"
+            #preview>
+      <source src="{{ cam.src }}" type='video/{{EXT}}; codecs="{{CODEC}}"'>
+    </video>
+  </div>
+</section>

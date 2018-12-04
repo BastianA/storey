@@ -1,1 +1,32 @@
-/* You can add global styles to this file, and also import other style files */
+/* global styles */
+
+@import '~normalize.css';
+
+:root {
+  --bg-color: #c6c6c6;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  background-color: var(--bg-color);
+}
+
+button {
+  display: inline-block;
+  border: none;
+  text-decoration: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  text-align: center;
+  background-color: unset;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  &:focus {
+    outline: none;
+  }
+}
