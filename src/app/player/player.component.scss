@@ -3,22 +3,34 @@
   --prv-padding: 2rem;
 
   position: relative;
-  width: 100vw;
-  max-width: 1280px;
+  width: 100%;
+  max-width: 960px;
+  z-index: 5;
 }
 .controls {
   position: absolute;
-  bottom: 0;
   left: 0;
   width: 100%;
   height: var(--ctrls-height);
-  background-color: rgba(255, 255, 255, .75);
+  background-color: #212121;
   display: flex;
   justify-content: space-between;
+  z-index: -999;
+  opacity: 0;
+  transition: all 100ms ease-in-out;
+
+  &.visible {
+    z-index: 999;
+    opacity: 1;
+  }
 
   &Btn {
     height: 100%;
     width: var(--ctrls-height);
+    color: white;
+    &:hover {
+      color: var(--accent-color);
+    }
   }
   &Icn {
     line-height: var(--ctrls-height);
@@ -29,20 +41,25 @@
 .switcher {
   position: absolute;
   top: 0;
-  right: 0;
-  bottom: var(--ctrls-height);
   left: 0;
   background-color: rgba(0, 0, 0, .5);
   overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  &[hidden] {
+    display: none;
+  }
 }
 
 .preview {
-  width: calc(50%);
-  padding: 1rem 2rem;
+  width: 50%;
+  height: calc(100% / 1.776);
 }
 
 video {
   vertical-align: top;
+  max-width: 100%;
   &#canvas {
     width: 100%;
   }

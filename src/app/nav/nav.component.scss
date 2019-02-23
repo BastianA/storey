@@ -1,0 +1,43 @@
+#siteNav {
+  color: orange;
+  align-self: center;
+
+  .navList {
+
+  }
+
+  .navItem {
+    position: relative;
+    display: inline-block;
+    text-transform: lowercase;
+    padding: 5px 15px;
+    letter-spacing: .75px;
+
+    &:first-child {
+      padding-left: 0;
+    }
+    &:last-child {
+      padding-right: 0;
+    }
+
+    &::after {
+      content: '';
+      position: absolute;
+      display: block;
+      width: calc(100% - 15px);
+      max-width: 50%;
+      height: 3px;
+      background-color: white;
+      cursor: pointer;
+      transition: var(--easing);
+      opacity: 0;
+    }
+
+    &:hover {
+      color: var(--accent-color);
+      &::after {
+        opacity: 1;
+      }
+    }
+  }
+}

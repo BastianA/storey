@@ -2,13 +2,14 @@
   …loading
 </section>
 <section *ngIf="preloadReady" id="player">
+  <h3 *ngIf="debug"><small>#debug: </small>{{playState.media}}</h3>
   <!-- Active Cam -->
   <video preload="auto" #player>
     <source [src]="currentCam.src" type='video/{{EXT}}; codecs="{{CODEC}}"'>
       Sorry – Dein Browser unterstützt kein WebM (Codec: VP8/VP9) oder MP4 (Codec: H.264) HTML5 Video.
   </video>
   <!-- Controls -->
-  <div class="controls">
+  <div class="controls" [class.visible]="showControls">
     <div class="controlsGroup">
       <button class="controlsBtn" (click)="togglePlayState()">
         <i *ngIf="playState.paused" class="controlsIcn material-icons">play_arrow</i>
@@ -29,12 +30,16 @@
   </div>
   <!-- Cam Switcher -->
   <div class="switcher" [hidden]="!camSwitcherVisible">
-    <video *ngFor="let cam of cams"
-            id="{{ cam.name }}"
-            (click)="setActiveCam(cam.name)"
-            class="preview"
-            #preview>
-      <source src="{{ cam.src }}" type='video/{{EXT}}; codecs="{{CODEC}}"'>
-    </video>
+    <ng-container *ngFor="let cam of cams">
+      <video *ngIf="switchables.includes(cam.name)"
+              id="{{ cam.name }}"
+              preload="auto"
+              (click)="setActiveCam(cam.name)"
+              class="preview"
+              #preview
+              muted>
+        <source src="{{ cam.src }}" type='video/{{EXT}}; codecs="{{CODEC}}"'>
+      </video>
+    </ng-container>
   </div>
 </section>

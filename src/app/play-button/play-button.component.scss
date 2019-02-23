@@ -1,0 +1,27 @@
+:host {
+  align-self: center;
+}
+
+.playButton {
+  border: 3px solid var(--txt-color);
+  padding: 10px;
+  text-align: center;
+  line-height: 20px;
+  color: var(--txt-color);
+  width: 150px;
+  transition: var(--easing);
+  margin: 0 auto 50px auto;
+  i {
+    position: relative;
+    top: 6px;
+    margin-right: -10px;
+  }
+  &Text {
+    display: block;
+    margin-top: -7px;
+  }
+  &:hover {
+    border-color: var(--accent-color);
+    color: var(--accent-color);
+  }
+}

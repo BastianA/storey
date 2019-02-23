@@ -1,0 +1,8 @@
+<h1>who was it?</h1>
+<button
+  *ngFor="let suspect of suspects"
+  type="button"
+  name="{{suspect.name}}"
+  [textContent]="suspect.name"
+  (click)="blame(suspect)">
+</button>

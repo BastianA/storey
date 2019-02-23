@@ -6,11 +6,21 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { PlayerComponent } from './player/player.component';
+import { NavComponent } from './nav/nav.component';
+import { CarouselComponent } from './carousel/carousel.component';
+import { PlayButtonComponent } from './play-button/play-button.component';
+import { LightboxComponent } from './lightbox/lightbox.component';
+import { BlameComponent } from './blame/blame.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    PlayerComponent
+    PlayerComponent,
+    NavComponent,
+    CarouselComponent,
+    PlayButtonComponent,
+    LightboxComponent,
+    BlameComponent
   ],
   imports: [
     BrowserModule,

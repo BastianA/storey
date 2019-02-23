@@ -1,9 +1,15 @@
 /* global styles */
 
 @import '~normalize.css';
+@import 'variables.scss';
+
+@import url('https://fonts.googleapis.com/css?family=Raleway');
 
 :root {
-  --bg-color: #c6c6c6;
+  --bg-color: #212121;
+  --accent-color: #ffa726;
+  --txt-color: #eeeeee;
+  --easing: 0.1125s ease-in-out;
 }
 
 * {
@@ -11,8 +17,23 @@
 }
 
 body {
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-family: "Raleway", "Helvetica Neue", sans-serif;
   background-color: var(--bg-color);
+  color: var(--txt-color);
+}
+
+a {
+  color: var(--txt-color);
+  text-decoration: none;
+  transition: var(--easing);
+  cursor: pointer;
+  &:hover {
+    color: var(--accent-color);
+  }
+}
+
+img {
+  max-width: 100%;
 }
 
 button {
@@ -26,6 +47,9 @@ button {
   background-color: unset;
   -webkit-appearance: none;
   -moz-appearance: none;
+  &:hover {
+    color: var(--accent-color);
+  }
   &:focus {
     outline: none;
   }

@@ -1,0 +1,5 @@
+<div id="lightbox" [class.visible]="isVisible">
+  <i class="closeBtn material-icons" title="Vorführung schließen" (click)="toggleLightbox()" [hidden]="blameTime">close</i>
+  <player [playState]="playerPlayState" (sharePlayState)="getPlayerPlayState($event)" [hidden]="blameTime"></player>
+  <blame [hidden]="!blameTime"></blame>
+</div>

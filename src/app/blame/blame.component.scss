@@ -1,0 +1,14 @@
+:host {
+}
+
+button {
+  background: var(--accent-color);
+  padding: 20px;
+  margin: 0 10px;
+  transition: transform ease-in-out 250ms;
+  &:hover {
+    box-shadow: 0 0 10px 5px rgba(0, 0, 0, .85);
+    color: black;
+    transform: translateY(-25%);
+  }
+}
