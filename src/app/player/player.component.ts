@@ -13,7 +13,6 @@ import { DataService } from '../data.service';
 export class PlayerComponent implements OnInit {
 
   // TODO: test browser compatibility and load corresponding format
-  // PATH: String = 'http://bastianandre.at/security/testvids_m'
   // PATH: String = 'assets/cams/WebM_V9_720p_Medium'
   PATH: String = 'assets/cams/mp4'
   // EXT: String = 'webm';
@@ -71,11 +70,7 @@ export class PlayerComponent implements OnInit {
     {
       name: 'outro-barbara',
       src: this.videoSrc('outro-barbara')
-    },
-    // {
-    //   name: 'outro-oscar-rainer',
-    //   src: this.videoSrc('outro-oscar-rainer')
-    // }
+    }
   ];
   currentCam = this.getCamByName('intro');
   switchables = [
@@ -161,6 +156,9 @@ export class PlayerComponent implements OnInit {
         this.player.play();
       }
       this.player.currentTime = marker;
+      this.previews.forEach(preview => {
+        preview.currentTime = marker;
+      });
     }
     if (toggle) {
       this.toggleCamSwitcher();
@@ -248,6 +246,9 @@ export class PlayerComponent implements OnInit {
     this.setActiveCam('wohnzimmer', false);
 
     this.player.currentTime = 0;
+    this.previews.forEach((preview) => {
+      preview.currentTime = 0;
+    });
     this.playState.finished = false;
     this.sharePlayState.emit(this.playState);
     this.showControls = true;

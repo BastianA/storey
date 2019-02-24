@@ -1,5 +1,5 @@
 #lightbox {
-  position: absolute;
+  position: fixed;
   background: rgba(0,0,0,0.95);
   top: 0;
   left: 0;
@@ -9,6 +9,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  overflow: hidden;
   visibility: hidden;
 
   &.visible {

@@ -2,7 +2,7 @@
   …loading
 </section>
 <section *ngIf="preloadReady" id="player">
-  <h3 *ngIf="debug"><small>#debug: </small>{{playState.media}}</h3>
+  <h3 *ngIf="debug" style="position: absolute;left: 25px;z-index: 999;"><small>#debug: </small>{{playState.media}}</h3>
   <!-- Active Cam -->
   <video preload="auto" #player>
     <source [src]="currentCam.src" type='video/{{EXT}}; codecs="{{CODEC}}"'>
@@ -15,16 +15,10 @@
         <i *ngIf="playState.paused" class="controlsIcn material-icons">play_arrow</i>
         <i *ngIf="playState.playing" class="controlsIcn material-icons">pause</i>
       </button>
-      <button class="controlsBtn">
-        <i class="controlsIcn material-icons">volume_up</i>
-      </button>
     </div>
     <div class="controlsGroup">
       <button class="controlsBtn" (click)="toggleCamSwitcher()">
         <i class="controlsIcn material-icons">view_comfy</i>
-      </button>
-      <button class="controlsBtn">
-        <i class="controlsIcn material-icons">fullscreen</i>
       </button>
     </div>
   </div>

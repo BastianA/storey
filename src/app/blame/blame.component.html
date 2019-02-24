@@ -1,8 +1,15 @@
-<h1>who was it?</h1>
-<button
-  *ngFor="let suspect of suspects"
-  type="button"
-  name="{{suspect.name}}"
-  [textContent]="suspect.name"
-  (click)="blame(suspect)">
-</button>
+<div class="BlameContainer">
+  <h1 class="BlameQuestion">Who do you accuse? Tell Rainer:</h1>
+  <div class="Suspects">
+    <div class="Suspect" *ngFor="let suspect of suspects" (click)="blame(suspect)">
+      <img class="SuspectImg" [src]="suspect.img" [ngStyle]="{'clip-path': circleClip}">
+      <button
+        class="SuspectBtn"
+        type="button"
+        name="{{suspect.name}}"
+        [textContent]="suspect.name"
+        (click)="blame(suspect)">
+    </button>
+    </div>
+  </div>
+</div>

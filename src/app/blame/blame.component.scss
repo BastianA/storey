@@ -1,14 +1,39 @@
 :host {
 }
 
-button {
-  background: var(--accent-color);
-  padding: 20px;
-  margin: 0 10px;
-  transition: transform ease-in-out 250ms;
-  &:hover {
-    box-shadow: 0 0 10px 5px rgba(0, 0, 0, .85);
-    color: black;
-    transform: translateY(-25%);
+.Blame {
+  &Container {
+    display: inherit;
+    flex-direction: row;
+  }
+  &Question {
+    text-align: center;
+  }
+}
+
+.Suspects {
+  display: flex;
+}
+
+
+.Suspect {
+  display: inherit;
+  flex-direction: column;
+  margin: 0 20px;
+  &Btn {
+    width: 150px;
+    background: var(--accent-color);
+    padding: 20px;
+    transition: all ease-in-out 250ms;
+    box-shadow: 0 0 5px 3px rgba(0, 0, 0, .75);
+    &:hover {
+      box-shadow: 0 0 10px 5px rgba(0, 0, 0, .85);
+      color: black;
+      transform: translateY(-25%);
+    }
+  }
+  &Img {
+    clip-path: circle(150px at center); // not working :(
+    max-width: 150px;
   }
 }
