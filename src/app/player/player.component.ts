@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import 'rxjs/add/observable/forkJoin';
 import { DataService } from '../data.service';
+import { CookieService } from '../cookie.service';
 
 @Component({
   selector: 'player',
@@ -28,7 +29,7 @@ export class PlayerComponent implements OnInit {
 
   // set true to shortcut videos
   // TODO: skipping in safari not working properly
-  debug: boolean = true;
+  debug: boolean = false;
 
   preloadReady: boolean = false;
   player;
@@ -87,10 +88,11 @@ export class PlayerComponent implements OnInit {
   };
   camSwitcherVisible = false;
   showControls = false;
+  skippableIntro:any = false;
 
 
 
-  constructor(private http: HttpClient, private data: DataService) { }
+  constructor(private http: HttpClient, private data: DataService, private cookieService: CookieService) { }
 
   ngOnInit() {
     this.preloadData();
@@ -229,6 +231,7 @@ export class PlayerComponent implements OnInit {
     this.playState.media = 'intro';
     this.sharePlayState.emit(this.playState);
     this.currentCam = this.getCamByName('intro');
+    this.skippableIntro = this.cookieService.get("replay").length;
 
     if (!this.player) {
       this.awaitDomPlayer().then((player) => {
@@ -244,6 +247,7 @@ export class PlayerComponent implements OnInit {
     this.data.changePlayState('main');
     this.updateMedia();
     this.setActiveCam('wohnzimmer', false);
+    this.skippableIntro = false;
 
     this.player.currentTime = 0;
     this.previews.forEach((preview) => {
@@ -257,6 +261,9 @@ export class PlayerComponent implements OnInit {
   }
 
   playSetup() {
+    if(this.camSwitcherVisible) {
+      this.toggleCamSwitcher();
+    }
     this.data.changePlayState('setup');
     this.updateMedia();
     this.setActiveCam('setup', false);
@@ -264,9 +271,11 @@ export class PlayerComponent implements OnInit {
     this.playState.finished = false;
     this.sharePlayState.emit(this.playState);
     this.showControls = false;
-    // skipping for dev: remove
-    this.player.currentTime = 29;
-    //
+    // skipping start
+    if (this.debug) {
+      this.player.currentTime = 29;
+    }
+    // skipping eng
     this.togglePlayState();
   }
 
@@ -276,9 +285,19 @@ export class PlayerComponent implements OnInit {
     this.setActiveCam(this.playState.media.toLowerCase(), false);
 
     this.player.currentTime = 0;
+    // skipping start
+    if (this.debug) {
+      this.player.currentTime = 80;
+    }
+    // skipping end
     this.playState.finished = false;
     this.sharePlayState.emit(this.playState);
     this.togglePlayState();
+  }
+
+  skipIntro() {
+    console.warn('user skipped intro');
+    this.player.currentTime = this.player.duration - .25;
   }
 
   updateMedia(suffix = false) {

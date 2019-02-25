@@ -30,7 +30,7 @@ export class LightboxComponent implements OnInit {
       this.handlePlayState(state);
     });
     this.data.currentSuspect.subscribe((suspect) => {
-      console.log(`user suspected ${suspect.name}`);
+      //console.log(`user suspected ${suspect.name}`);
     });
   }
 
@@ -55,7 +55,6 @@ export class LightboxComponent implements OnInit {
         break;
       }
       case 'intro': {
-        // show lightbox
         this.toggleLightbox();
         this.player.playIntro();
         if (this.firstPreparation) {
@@ -117,6 +116,12 @@ export class LightboxComponent implements OnInit {
           this.blameTime = true;
           this.finishSequence(this);
           console.log('setup finished. now decide...');
+        } else if (this.data.getPlayState() === 'outro') {
+          console.log('outro ended');
+          this.finishSequence(this);
+          this.isVisible = false;
+          this.data.changePlayState('end');
+          this.data.setPause();
         }
       });
     });

@@ -22,6 +22,11 @@
       </button>
     </div>
   </div>
+  <div class="controls" [class.visible]="skippableIntro">
+    <button class="controlsBtn" (click)="skipIntro()" title="Intro überspringen...">
+      <i class="controlsIcn material-icons">slow_motion_video</i>
+    </button>
+  </div>
   <!-- Cam Switcher -->
   <div class="switcher" [hidden]="!camSwitcherVisible">
     <ng-container *ngFor="let cam of cams">
