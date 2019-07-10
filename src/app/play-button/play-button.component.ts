@@ -33,11 +33,10 @@ export class PlayButtonComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.info('replaying? ', this.cookieService.get('replay'));
-    if (this.cookieService.get("replay") == 'true' && performance.navigation.type == 1) {
+    console.info('replaying? ', localStorage.getItem('replay'));
+    if (localStorage.getItem('replay') == 'true' && performance.navigation.type == 1) {
       setTimeout(() => {
         this.data.changePlayState('intro');
-        this.cookieService.set('replay', 'false');
       }, 500);
     }
   }
@@ -48,7 +47,7 @@ export class PlayButtonComponent implements OnInit {
         this.data.changePlayState('intro');
     }
     else if (currentState === 'end') {
-        this.cookieService.set('replay', 'true');
+        localStorage.setItem('replay', 'true');
         location.reload(false);
     }
     else {

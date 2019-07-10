@@ -67,3 +67,19 @@ video {
     cursor: pointer;
   }
 }
+
+#skipIntroBtn {
+  width: 50%;
+  background-color: var(--accent-color);
+  color: black;
+  &:hover {
+    color: black;
+  }
+}
+
+#replayIntroBtn {
+  width: 50%;
+  &:hover {
+    color: white;
+  }
+}

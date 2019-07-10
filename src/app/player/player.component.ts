@@ -30,6 +30,7 @@ export class PlayerComponent implements OnInit {
   // set true to shortcut videos
   // TODO: skipping in safari not working properly
   debug: boolean = false;
+  deployLocally: boolean = true;
 
   preloadReady: boolean = false;
   player;
@@ -111,17 +112,24 @@ export class PlayerComponent implements OnInit {
 
   awaitDomPlayer() {
     let playerRef = this.playerRef;
+    let deployLocally = this.deployLocally;
     let readyPlayer = new Promise(function(resolve, reject) {
-      playerRef.changes.subscribe((ref) => {
-        let player = ref.first.nativeElement;
+      // if no need to wait
+      if (deployLocally && playerRef.first.nativeElement) {
+        let player = playerRef.first.nativeElement;
+        resolve(player);
+      } else {
+        playerRef.changes.subscribe((ref) => {
+          let player = ref.first.nativeElement;
 
-        if (player) {
-          resolve(player);
-        }
-        else {
-          reject(Error("It broke"));
-        }
-      });
+          if (player) {
+            resolve(player);
+          }
+          else {
+            reject(Error("It broke"));
+          }
+        });
+      }
     })
     return readyPlayer;
   }
@@ -167,7 +175,7 @@ export class PlayerComponent implements OnInit {
     }
   }
 
-  togglePlayState() {
+  togglePlayState(replayIntro = false) {
     let halted = this.player.paused || this.player.finished
     // refactor to simple if else or main and default
     switch (this.playState.media) {
@@ -176,8 +184,14 @@ export class PlayerComponent implements OnInit {
           if (this.debug) {
             this.player.currentTime = 278;
           }
-          this.player.play();
-          this.data.setPlay();
+          if (this.skippableIntro && replayIntro) {
+            this.player.play();
+            this.data.setPlay();
+          } else if (this.player.play()) {
+            this.player.play();
+            this.data.setPlay();
+          }
+        // if not halted
         } else {
           this.player.pause();
           this.data.setPause();
@@ -185,6 +199,9 @@ export class PlayerComponent implements OnInit {
         break;
       }
       case 'main': {
+        if (localStorage.getItem('replay')) {
+          localStorage.setItem('replay', 'false');
+        }
         if (halted) {
           if (this.debug) {
             // skipping for dev: remove
@@ -231,7 +248,7 @@ export class PlayerComponent implements OnInit {
     this.playState.media = 'intro';
     this.sharePlayState.emit(this.playState);
     this.currentCam = this.getCamByName('intro');
-    this.skippableIntro = this.cookieService.get("replay").length;
+    this.skippableIntro = localStorage.getItem('replay');
 
     if (!this.player) {
       this.awaitDomPlayer().then((player) => {
@@ -241,6 +258,11 @@ export class PlayerComponent implements OnInit {
     else {
       this.togglePlayState();
     }
+  }
+
+  replayIntro() {
+    this.skippableIntro = false;
+    this.togglePlayState(true);
   }
 
   playMain() {
@@ -298,6 +320,7 @@ export class PlayerComponent implements OnInit {
   skipIntro() {
     console.warn('user skipped intro');
     this.player.currentTime = this.player.duration - .25;
+    this.togglePlayState();
   }
 
   updateMedia(suffix = false) {
@@ -308,19 +331,35 @@ export class PlayerComponent implements OnInit {
   }
 
   preloadData() {
-    let batch = [];
+    if (this.deployLocally) {
+      this.ready.emit(true);
+      this.preloadReady = true;
+    }
+    else {
+      let batch = [];
 
-    this.cams.forEach((cam) => {
-      batch.push(this.http.get(cam.src, {responseType: 'blob'}));
-    });
+      const headerDict = {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Access-Control-Allow-Headers': 'Content-Type',
+      }
 
-    Observable.forkJoin(batch).subscribe(
-      (data) => {
-        this.ready.emit(true);
-        this.preloadReady = true;
-      },
-      err => console.error(err)
-    );
+      const requestOptions = {
+        headers: new Headers(headerDict),
+      };
+
+      this.cams.forEach((cam) => {
+        batch.push(this.http.get(cam.src, {responseType: 'blob'}));
+      });
+
+      Observable.forkJoin(batch).subscribe(
+        (data) => {
+          this.ready.emit(true);
+          this.preloadReady = true;
+        },
+        err => console.error(err)
+      );
+    }
   }
 
 }
