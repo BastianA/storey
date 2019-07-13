@@ -31,3 +31,6 @@ sudo chown -R <username> /Users/<username>/<path-to-project>/security/node_modul
 
 ### run the app
 - run `$ ng serve` to start a local web server on [localhost:4200](http://localhost:4200/)
+
+### build the app
+- run `$ng build` to build the application into the dist folder
