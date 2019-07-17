@@ -9,7 +9,12 @@ import Siema from 'siema';
 })
 export class CarouselComponent implements OnInit {
 
-  constructor() { }
+  constructor() {
+    Siema.prototype.useArrows = function() {
+      document.querySelector('.siema-previous').addEventListener('click', () => this.prev());
+      document.querySelector('.siema-next').addEventListener('click', () => this.next());
+    }
+  }
 
   ngOnInit() {
     new Siema({
@@ -18,7 +23,7 @@ export class CarouselComponent implements OnInit {
       onChange: () => {},
       startIndex: 0,
       draggable: true
-    });
+    }).useArrows();
   }
 
 }
