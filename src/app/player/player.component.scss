@@ -4,7 +4,7 @@
 
   position: relative;
   width: 100%;
-  max-width: 960px;
+  max-width: 1280px;
   z-index: 5;
 }
 .controls {
@@ -52,6 +52,11 @@
   }
 }
 
+.focused {
+  border: 5px solid var(--accent-color);
+  z-index: 1000;
+}
+
 .preview {
   width: 50%;
   height: calc(100% / 1.776);
@@ -73,13 +78,13 @@ video {
   background-color: var(--accent-color);
   color: black;
   &:hover {
-    color: black;
+    color: white;
   }
 }
 
 #replayIntroBtn {
   width: 50%;
   &:hover {
-    color: white;
+    color: var(--accent-color);
   }
 }

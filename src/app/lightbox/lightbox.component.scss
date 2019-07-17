@@ -21,10 +21,10 @@
     cursor: pointer;
     align-self: flex-end;
 
-    @media(min-width: 960px) {
+    @media(min-width: 1280px) {
       position: absolute;
-      top: calc((100vh - 540px)/2);
-      right: calc((100vw - 960px)/2);
+      top: calc((100vh - 720px)/2);
+      right: calc((100vw - 1280px)/2);
       font-size: 2.5rem;
       transform: translateY(-100%);
     }

@@ -9,7 +9,7 @@ import { CookieService } from '../cookie.service';
 })
 export class PlayButtonComponent implements OnInit {
 
-  buttonText:string = 'play';
+  buttonText:string = 'film abspielen';
   reloaded:any;
 
   constructor(private data: DataService, private cookieService: CookieService) {
@@ -17,17 +17,17 @@ export class PlayButtonComponent implements OnInit {
       let currentState: any = this.data.getPlayState();
       if (currentState !== 'initial' && currentState !== 'end') {
         if (isPlaying) {
-          this.buttonText = 'playing';
+          this.buttonText = 'Wird abgespielt';
         }
         else {
-          this.buttonText = 'resume ' + currentState;
+          this.buttonText = currentState + ' fortsetzen' ;
         }
       }
       else if (currentState === 'end') {
-        this.buttonText = 'replay';
+        this.buttonText = 'erneut abspielen';
       }
       else {
-        this.buttonText = 'play';
+        this.buttonText = 'film abspielen';
       }
     })
   }
@@ -43,6 +43,7 @@ export class PlayButtonComponent implements OnInit {
 
   play() {
     let currentState = this.data.getPlayState();
+    console.log("Button clicked: ", currentState);
     if (currentState === 'initial') {
         this.data.changePlayState('intro');
     }
@@ -52,6 +53,7 @@ export class PlayButtonComponent implements OnInit {
     }
     else {
       this.data.changePlayState(currentState);
+      console.log('paused', currentState)
     }
   }
 

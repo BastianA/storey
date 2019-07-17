@@ -1,5 +1,5 @@
 <div class="BlameContainer">
-  <h1 class="BlameQuestion">Who do you accuse? Tell Rainer:</h1>
+  <h1 class="BlameQuestion">Welchen der Verdächtigen beschuldigst du?</h1>
   <div class="Suspects">
     <div class="Suspect" *ngFor="let suspect of suspects" (click)="blame(suspect)">
       <img class="SuspectImg" [src]="suspect.img" [ngStyle]="{'clip-path': circleClip}">

@@ -3,11 +3,11 @@
   flex-direction: column;
   justify-content: center;
   // height: 100vh;
-  max-width: 960px;
+  max-width: 1280px;
   margin: 0 auto;
   padding: 0 2rem;
 
-  @media(min-width: 1024px) {
+  @media(min-width: 1280px) {
     padding: 0;
   }
 
@@ -22,8 +22,8 @@
     flex-grow: 1;
     justify-content: flex-end;
 
-    // for now
-    display: none;
+    // for assignment
+    //display: none;
   }
 }
 

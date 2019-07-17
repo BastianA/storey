@@ -43,19 +43,23 @@ export class PlayerComponent implements OnInit {
     },
     {
       name: 'buero',
-      src: this.videoSrc('buero')
+      src: this.videoSrc('buero'),
+      focused: false,
     },
     {
       name: 'kueche',
-      src: this.videoSrc('kueche')
+      src: this.videoSrc('kueche'),
+      focused: false,
     },
     {
       name: 'schlafzimmer',
-      src: this.videoSrc('schlafzimmer')
+      src: this.videoSrc('schlafzimmer'),
+      focused: false,
     },
     {
       name: 'wohnzimmer',
-      src: this.videoSrc('wohnzimmer')
+      src: this.videoSrc('wohnzimmer'),
+      focused: false,
     },
     {
       name: 'setup',
@@ -90,6 +94,8 @@ export class PlayerComponent implements OnInit {
   camSwitcherVisible = false;
   showControls = false;
   skippableIntro:any = false;
+
+  isInitialPreview = true;
 
 
 
@@ -173,7 +179,32 @@ export class PlayerComponent implements OnInit {
     if (toggle) {
       this.toggleCamSwitcher();
     }
+
+
+    //set previously clicked preview to unfocused
+    if (this.isInitialPreview){
+      const previouslyFocusedPreview = this.previews.find((preview) => {
+        return preview.id === 'wohnzimmer';
+      });
+      this.isInitialPreview = !this.isInitialPreview;
+      console.log('isInitialPreview Fuktion wurde durchgeführt');
+    }
+    previouslyFocusedPreview.classList.remove('focused');
+
+
+
+    //set clicked preview to focused
+    if (name !== 'undefined'){
+    const focusedPreview = this.previews.find((preview) => {
+      return preview.id === name;
+    });
+    previouslyFocusedPreview = focusedPreview;
+
+    focusedPreview.classList.add('focused');
+    }
+    console.log(previouslyFocusedPreview.classList);
   }
+
 
   togglePlayState(replayIntro = false) {
     let halted = this.player.paused || this.player.finished
@@ -182,25 +213,25 @@ export class PlayerComponent implements OnInit {
       case 'intro': {
         if (halted) {
           if (this.debug) {
-            this.player.currentTime = 278;
-          }
-          if (this.skippableIntro && replayIntro) {
-            this.player.play();
-            this.data.setPlay();
-          } else if (this.player.play()) {
-            this.player.play();
-            this.data.setPlay();
-          }
-        // if not halted
-        } else {
-          this.player.pause();
-          this.data.setPause();
-        }
+           this.player.currentTime = 278;
+         }
+         if (this.skippableIntro && replayIntro) {
+           this.player.play();
+           this.data.setPlay();
+         } else if (this.player.play()) {
+           this.player.play();
+           this.data.setPlay();
+         }
+       // if not halted
+       } else {
+         this.player.pause();
+         this.data.setPause();
+       }
         break;
       }
       case 'main': {
         if (localStorage.getItem('replay')) {
-          localStorage.setItem('replay', 'false');
+          localStorage.setItem('replay', 'true');
         }
         if (halted) {
           if (this.debug) {
@@ -261,8 +292,12 @@ export class PlayerComponent implements OnInit {
   }
 
   replayIntro() {
-    this.skippableIntro = false;
-    this.togglePlayState(true);
+    if (localStorage.getItem('replay') === 'true'){
+      this.skippableIntro = false;
+      if (this.playState.playing === false) {
+        this.togglePlayState(true);
+      }
+    }
   }
 
   playMain() {
@@ -318,9 +353,11 @@ export class PlayerComponent implements OnInit {
   }
 
   skipIntro() {
-    console.warn('user skipped intro');
-    this.player.currentTime = this.player.duration - .25;
-    this.togglePlayState();
+    if (this.skippableIntro === 'true') {
+      console.warn('user skipped intro');
+      this.player.currentTime = this.player.duration - .25;
+      //this.togglePlayState();
+    }
   }
 
   updateMedia(suffix = false) {
@@ -361,5 +398,26 @@ export class PlayerComponent implements OnInit {
       );
     }
   }
+
+  /*
+  markCurrentlyPlayingVideo(clickedCam:string){
+
+    const currentPreview = this.previews.find((preview) => {
+      return preview.id === cam.name;
+    });
+
+    //set focused for all cams false and remove focused css element
+    this.cams.forEach((cam) =>{
+      cam.focused = false;
+
+      currentPreview.classList.remove("focused");
+    });
+
+    //focus the clicked cam and add focused css element
+    this.cams.find(cam => cam.name === clickedCam).focused = true;
+
+    currentPreview.classList.add("focused");
+  }
+  */
 
 }

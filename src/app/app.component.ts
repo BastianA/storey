@@ -12,5 +12,5 @@ export class AppComponent {
   title = 'security';
 
   // site variables & paths
-  securityLogo = 'assets/img/SecurityLogo_PlayPause.png';
+  securityLogo = 'assets/img/SecurityLogo.png';
 }
