@@ -181,26 +181,30 @@ export class PlayerComponent implements OnInit {
       this.toggleCamSwitcher();
     }
 
-    //set previously clicked preview to unfocused
-    if (this.isInitialPreview){
-      this.previouslyFocusedPreview = this.previews.find((preview) => {
-        return preview.id === 'wohnzimmer';
+    //ONLY IN MAIN
+    if (this.playState.media === 'main'){
+
+      //set previously clicked preview to unfocused
+      if (this.isInitialPreview){
+        this.previouslyFocusedPreview = this.previews.find((preview) => {
+          return preview.id === 'wohnzimmer';
+        });
+        this.isInitialPreview = !this.isInitialPreview;
+        console.log('isInitialPreview Fuktion wurde durchgeführt');
+      }
+      this.previouslyFocusedPreview.classList.remove('focused');
+
+
+
+      //set clicked preview to focused
+      if (name !== 'undefined'){
+      const focusedPreview = this.previews.find((preview) => {
+        return preview.id === name;
       });
-      this.isInitialPreview = !this.isInitialPreview;
-      console.log('isInitialPreview Fuktion wurde durchgeführt');
-    }
-    this.previouslyFocusedPreview.classList.remove('focused');
+      this.previouslyFocusedPreview = focusedPreview;
 
-
-
-    //set clicked preview to focused
-    if (name !== 'undefined'){
-    const focusedPreview = this.previews.find((preview) => {
-      return preview.id === name;
-    });
-    this.previouslyFocusedPreview = focusedPreview;
-
-    focusedPreview.classList.add('focused');
+      focusedPreview.classList.add('focused');
+      }
     }
   }
 

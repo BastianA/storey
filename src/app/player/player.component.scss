@@ -71,6 +71,9 @@ video {
   &.preview {
     cursor: pointer;
   }
+  &::-webkit-media-controls {
+  display: none;
+  }
 }
 
 #skipIntroBtn {
