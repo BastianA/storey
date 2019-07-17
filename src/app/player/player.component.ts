@@ -96,6 +96,7 @@ export class PlayerComponent implements OnInit {
   skippableIntro:any = false;
 
   isInitialPreview = true;
+  previouslyFocusedPreview: any = null;
 
 
 
@@ -180,16 +181,15 @@ export class PlayerComponent implements OnInit {
       this.toggleCamSwitcher();
     }
 
-
     //set previously clicked preview to unfocused
     if (this.isInitialPreview){
-      const previouslyFocusedPreview = this.previews.find((preview) => {
+      this.previouslyFocusedPreview = this.previews.find((preview) => {
         return preview.id === 'wohnzimmer';
       });
       this.isInitialPreview = !this.isInitialPreview;
       console.log('isInitialPreview Fuktion wurde durchgeführt');
     }
-    previouslyFocusedPreview.classList.remove('focused');
+    this.previouslyFocusedPreview.classList.remove('focused');
 
 
 
@@ -198,11 +198,10 @@ export class PlayerComponent implements OnInit {
     const focusedPreview = this.previews.find((preview) => {
       return preview.id === name;
     });
-    previouslyFocusedPreview = focusedPreview;
+    this.previouslyFocusedPreview = focusedPreview;
 
     focusedPreview.classList.add('focused');
     }
-    console.log(previouslyFocusedPreview.classList);
   }
 
 
