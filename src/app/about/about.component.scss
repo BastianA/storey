@@ -1,0 +1,44 @@
+.hero{
+   max-width:1280px;
+    /* The image used */
+  background-image: url("https://security-interactive.de/assets/img/team.jpg");
+  /* Full height */
+  height: 720px;
+  /* Center and scale the image nicely */
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.abouttext{
+    font-size: 1em;
+    background-color: rgba(0,0,0,.8);
+    text-align: left;
+    padding: 0 8em 1em 4em;
+    z-index: 90;
+  }
+  
+  .team {
+    position: relative;
+  }
+  
+  .team .teammember{
+    float: left;
+    display:block;
+    position: relative;
+    bottom: 3em;
+    margin: 0 2em 0 2em;
+    padding: .75em 1em .75em 1em;
+    background-color: rgba(0,0,0,0.7);
+    font-size: 1.2em;
+      color: var(--accent-color);
+  }
+  .team .teammember:hover{
+    color: var(--accent-color);
+  }
+
+  

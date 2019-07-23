@@ -13,7 +13,5 @@ export class AppComponent {
 
   // site variables & paths
   securityLogo = 'assets/img/SecurityLogo.png';
-  contactPage = 'assets/sites/contact.html';
-  homePage = 'src/index.html';
-  aboutPage = 'assets/sites/about.html';
+  labsterLogo = 'assets/img/LabsterLogo.png';
 }
