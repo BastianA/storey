@@ -1,14 +1,16 @@
 <div id="siteNav">
-  <ul class="navList">
+  <ul class="static navList">
     <a routerLink="home" routerLinkActive="active" class="navItem">Security</a>
     <a routerLink="about" routerLinkActive="active" class="navItem">Über uns</a>
     <a routerLink="contact" routerLinkActive="active" class="navItem">Kontakt</a>
-
-
-    <!--
-    <a [href]="homePage" class="navItem">Security</a>
-    <a [href]="aboutPage" class="navItem">Über uns</a>
-    <a [href]="contactPage" class="navItem">Kontakt</a>
-    -->
   </ul>
+    <i class="material-icons" id="menu" (click)="togExpand()" >menu</i>
+    <div class="clear"></div>
+    <ul class="navList" [class.expanded]="expanded">
+      <a routerLink="home" routerLinkActive="active" class="navItem">Security</a>
+      <a routerLink="about" routerLinkActive="active" class="navItem">Über uns</a>
+      <a routerLink="contact" routerLinkActive="active" class="navItem">Kontakt</a>
+    </ul> 
 </div>
+
+

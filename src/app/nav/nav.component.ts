@@ -12,4 +12,10 @@ export class NavComponent implements OnInit {
   ngOnInit() {
   }
 
+  expanded = false;
+
+  togExpand(){
+    this.expanded = !this.expanded;
+    console.log(this.expanded);
+  }
 }

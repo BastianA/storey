@@ -1,6 +1,6 @@
 #siteNav {
   color: orange;
-  align-self: center;
+  //align-self: center;
 
   .navList {
 
@@ -44,4 +44,54 @@
   .active{
     color: var(--accent-color);
   }
+
+  
+  #menu{
+    display:none;
+  }
+
+  .clear{
+    clear: both;
+  }
+
+  
+
+  @media screen and (max-width: 540px) {
+    .expanded{
+      position:relative;
+      top:0;
+      display: flex;
+      position:relative;
+      flex-direction: column;
+      transition: .3s;
+    }
+
+    ul:not(.expanded){
+      top:-2em;
+      transition-duration: display .3s;
+      transition-delay: display .3s;
+      display:none;
+    }
+
+    .navItem{
+      padding: 5px 0;
+    }
+
+    .navList{
+      padding:0;
+      margin: 1em 0 0 0;
+    }
+
+    #menu {
+      display: inherit;
+      width:24px;
+      float:right;
+    }
+
+    .static{
+      display:none;
+    }
+  }
+
+
 }
