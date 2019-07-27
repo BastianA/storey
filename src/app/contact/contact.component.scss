@@ -1,4 +1,55 @@
-.ng-valid[required], .ng-valid.required {border: 1px solid #42A948;}
-.error {color:#ff0000;}
-.success { color:green; }
-.contact-message { text-align: center; }
+.btn {
+    border: 3px solid var(--txt-color);
+    padding: 10px;
+    text-align: center;
+    line-height: 20px;
+    color: var(--txt-color);
+    width: 200px;
+    transition: var(--easing);
+    margin: 0 auto 50px auto;
+    &Text {
+      display: block;
+      margin-top: -7px;
+    }
+    &:hover {
+      border-color: var(--accent-color);
+      color: var(--accent-color);
+    }
+  }
+
+  .disabled{
+    pointer-events: none;
+    border-color: grey;
+      color: grey;
+  }
+
+  form{
+      display:flex;
+      flex-direction: column;
+      justify-content: center;
+      margin-left:auto;
+      margin-right:auto;
+      max-width: 300px;
+  }
+
+  .formElement{
+    display:flex;
+    flex-direction: column;
+      margin: 0 0 1.5em 0;
+  }
+
+  h2{
+      text-align: center;
+  }
+
+  form textarea{
+    height:15em;
+  }
+
+  .erforderlich{
+      color:red;
+  }
+
+  .form-control.ng-touched.ng-invalid{
+      border: 2px solid red;
+  }

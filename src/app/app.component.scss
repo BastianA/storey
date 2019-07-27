@@ -31,3 +31,23 @@
 .siteLogo {
   max-height: 80px;
 }
+@media screen and (max-width: 800px) {
+  #appContainer{
+    padding:0;
+  }
+  #siteHeader{
+    margin: 0 2rem;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .siteLogo {
+    max-height: 50px;
+  }
+}
+
+@media screen and (max-width: 540px) {
+    nav{
+      flex-direction: row;
+    }
+}

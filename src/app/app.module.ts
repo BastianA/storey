@@ -20,7 +20,9 @@ import { HomeComponent } from './home/home.component';
 import { AboutComponent } from './about/about.component';
 import { ContactComponent } from './contact/contact.component';
 import { AngularWaitBarrier } from 'blocking-proxy/built/lib/angular_wait_barrier';
+import { BrowserNotSupportedComponent } from './browser-not-supported/browser-not-supported.component';
 
+import {HttpModule} from '@angular/http';
 
 @NgModule({
   declarations: [
@@ -33,13 +35,15 @@ import { AngularWaitBarrier } from 'blocking-proxy/built/lib/angular_wait_barrie
     BlameComponent,
     HomeComponent,
     AboutComponent,
-    ContactComponent
+    ContactComponent,
+    BrowserNotSupportedComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     HttpClientModule,
     FormsModule,
+    HttpModule,
     RouterModule.forRoot([
       { 
         path: '', 

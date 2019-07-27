@@ -1,52 +1,53 @@
-<section class="cmspage mtb-40">
-    <div class="container">
-      <div class="page-desc" [hidden]="submitted">
-        <div class="row justify-content-center">
-          <div class="col-md-8">
-            <h1>Contact</h1>
-            <form (ngSubmit)="onSubmit()" #contactForm="ngForm">
-              <div class="form-group">
-                <input type="text" name="name" id="name" [(ngModel)]="model.name" class="form-control" placeholder="Name" required #name="ngModel">
-                <div *ngIf="name.invalid && (name.dirty || name.touched)" class="error">
-                  <div *ngIf="name.errors.required">
-                    Name is required.
-                  </div>
-                </div>
-              </div>
-              <div class="form-group">
-                <input type="text" name="email" id="email" [(ngModel)]="model.email" class="form-control" placeholder="E-Mail" required email #email="ngModel">
-                <div *ngIf="email.invalid && (email.dirty || email.touched)" class="error">
-                  <div *ngIf="email.errors.required">Email is required.</div>
-                  <div *ngIf="email.errors.email">Email must be a valid email address.</div>
-                </div>
-              </div>
-              <div class="form-group">
-                <input type="text" name="phone" id="phone" [(ngModel)]="model.phone" class="form-control" placeholder="Phone">
-              </div>
-              <div class="form-group">
-                <textarea name="message" id="message" [(ngModel)]="model.message" rows="5" class="form-control" placeholder="Message" required #message="ngModel"></textarea>
-                <div *ngIf="message.invalid && (message.dirty || message.touched)" class="error">
-                  <div *ngIf="message.errors.required">Message is required.</div>
-                </div>
-              </div>
-              <div class="form-group">
-                <button [disabled]="!contactForm.form.valid" class="btn btn-success">Send Message</button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-      <div class="service-error" *ngIf="error">
-        <h1>{{error.errorTitle}}</h1>
-        <h3>{{error.errorDesc}}</h3>
-      </div>
-      <div [hidden]="!submitted" class="contact-message">
-        <div *ngIf="model.id" class="contact-success">
-          <h2 class="success">Success!</h2>
-          <h4>Contact form has been successfully submitted.</h4>
-          <br />
-          <button (click)="gotoHome()" class="btn btn-info">Go to Home</button>
-        </div>
+<!-- 
+<form>
+  <div class="form-group">
+    <label for="name">Name</label>
+    <input id="name" type="text" class="form-control">
+  </div>
+  <div class="form-group">
+    <label for="subject">Betreff</label>
+    <input id="subject" type="text" class="form-control">
+  </div>
+  <div class="form-group">
+    <label for="email">E-Mail Addresse</label>
+    <input id="email" type="text" class="form-control">
+  </div>
+  <div class="form-group">
+    <label for="message">Nachricht</label>
+    <textarea id="message" cols="30" rows="10" type="text" class="form-control"></textarea>
+  </div>
+  <button (click)="validateInput()" class="btn btn-primary">Senden</button>
+
+</form>
+-->
+<h2>Schreib uns eine Mail</h2>
+<form name="form" ngNoForm method="post" class="contact-form" action="https://security-interactive.de/assets/php/contactform.php" #form id="form" (keyup)="checkValid()">
+    <div class="formElement">
+      <label>Name</label>
+      <input ngModel required type="text" #name="ngModel" name="name" placeholder="Dein Name" class="form-control" id="name">
+      <div class="erforderlich" *ngIf="!name.valid && name.touched">Name ist erforderlich</div>
+    </div>
+
+    <div class="formElement">
+      <label>E-Mail</label>
+      <input ngModel required type="email" #mail="ngModel" pattern="[a-zA-Z0-9\.]+\@[a-zA-Z0-9]+\.[a-zA-Z0-9]{2,3}" name="mail" id="mail" placeholder="Deine E-Mail Adresse" class="form-control">
+      <div class="erforderlich" *ngIf="!mail.valid && mail.touched">
+        <div *ngIf="mail.errors.required">E-Mail Adresse ist erforderlich</div>
+        <div *ngIf="mail.errors.pattern">Bitte eine gültige E-Mail Adresse angeben</div>
       </div>
     </div>
-  </section>
+    
+    <div class="formElement">
+      <label>Betreff</label>
+      <input ngModel required type="text" #subject="ngModel" name="subject" placeholder="Worum geht es?" class="form-control" id="subject">
+      <div class="erforderlich" *ngIf="!subject.valid && subject.touched">Betreff ist erforderlich</div>
+    </div>
+    
+    <div class="formElement">
+      <label>Nachricht</label>
+      <textarea ngModel required #message="ngModel" name="message" placeholder="Deine Nachricht an uns" class="form-control" id="message"></textarea>
+      <div class="erforderlich" *ngIf="!message.valid && message.touched">Nachricht ist erforderlich</div>
+    </div>
+
+    <button type="submit" name="submit" class="btn btn-primary" [class.disabled]="!formDataValid" (click)="alertmessage()">Senden</button>
+</form>

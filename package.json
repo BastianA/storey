@@ -25,6 +25,7 @@
     "core-js": "^2.5.4",
     "hammerjs": "^2.0.8",
     "json-schema": "^0.2.3",
+    "mailgun-js": "^0.22.0",
     "ngx-cookie-service": "^2.1.0",
     "normalize.css": "^8.0.1",
     "rxjs": "^6.0.0",

@@ -12,33 +12,98 @@
     display: flex;
     justify-content: center;
     align-items: flex-end;
+    overflow: hidden;
 }
 
 .abouttext{
     font-size: 1em;
     background-color: rgba(0,0,0,.8);
     text-align: left;
-    padding: 0 8em 1em 4em;
+    padding: 1em 8em 1em 4em;
     z-index: 90;
   }
+
+.abouttext-mobile{
+  display:none;
+}
   
   .team {
     position: relative;
+    display: flex;
+    justify-content: center;
+
   }
   
   .team .teammember{
-    float: left;
     display:block;
     position: relative;
-    bottom: 3em;
     margin: 0 2em 0 2em;
     padding: .75em 1em .75em 1em;
-    background-color: rgba(0,0,0,0.7);
+    bottom: 2em;
+    background-color: rgba(0,0,0,0.8);
+    
     font-size: 1.2em;
-      color: var(--accent-color);
+    color: var(--accent-color);
   }
   .team .teammember:hover{
     color: var(--accent-color);
   }
 
+  .row {
+    padding-top: 2em;
+    display:flex;
+    align-self: center;
+  }
   
+  .socialMedia {
+    border: 3px solid var(--txt-color);
+    padding: 10px;
+    text-align: center;
+    line-height: 20px;
+    color: var(--txt-color);
+    width: 200px;
+    transition: var(--easing);
+    margin: 0 auto 50px auto;
+    &Text {
+      display: block;
+      margin-top: -7px;
+    }
+    &:hover {
+      border-color: var(--accent-color);
+      color: var(--accent-color);
+    }
+  }
+
+  @media screen and (max-width: 800px) {
+    .hero{
+      width:100%;
+      max-height: 720px;
+    }
+    .abouttext{
+      display: none;
+    }
+    .team .teammember{
+      margin:0;
+      bottom:0;
+    }
+    .abouttext-mobile, .row, .team{
+      padding: 0 2rem;
+    }
+    .abouttext-mobile{
+      display:block;
+      padding-bottom:1em;
+    }
+  }
+
+    @media screen and (max-width: 470px) {
+      .team .teammember{
+        padding: .75em 1em .75em 1em;
+        bottom: 2em;
+        
+        font-size: .8em;
+      }
+      .hero{
+        width:100vw;
+        height:250px;
+      }
+    }

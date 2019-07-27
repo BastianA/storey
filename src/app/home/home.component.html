@@ -1,3 +1,4 @@
-<carousel></carousel>
-<play-button></play-button>
-<lightbox></lightbox>
+<carousel *ngIf="supported"></carousel>
+<play-button *ngIf="supported"></play-button>
+<lightbox *ngIf="supported"></lightbox>
+<browser-not-supported *ngIf="supported == false"></browser-not-supported>
