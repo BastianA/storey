@@ -45,6 +45,11 @@
     color: var(--accent-color);
   }
 
+
+  .responsive {
+    position:relative;
+    display:none;
+  }
   
   #menu{
     display:none;
@@ -68,9 +73,7 @@
 
     ul:not(.expanded){
       top:-2em;
-      transition-duration: display .3s;
-      transition-delay: display .3s;
-      display:none;
+      transition-duration: .3s;
     }
 
     .navItem{
