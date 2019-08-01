@@ -92,13 +92,14 @@ export class PlayerComponent implements OnInit {
     media: null
   };
   camSwitcherVisible = false;
-  showControls = false;
+  //controls now always visible
+  showControls = true;
   skippableIntro:any = false;
 
   isInitialPreview = true;
   previouslyFocusedPreview: any = null;
 
-
+  fullscreen:boolean = false;
 
   constructor(private http: HttpClient, private data: DataService, private cookieService: CookieService) { }
 
@@ -315,7 +316,10 @@ export class PlayerComponent implements OnInit {
     });
     this.playState.finished = false;
     this.sharePlayState.emit(this.playState);
-    this.showControls = true;
+
+    //controls now always visible
+    //this.showControls = true;
+    document.getElementById("switcherbtn").classList.remove("hidden");
 
     this.togglePlayState();
   }
@@ -330,7 +334,11 @@ export class PlayerComponent implements OnInit {
     this.player.currentTime = 0;
     this.playState.finished = false;
     this.sharePlayState.emit(this.playState);
-    this.showControls = false;
+
+    //controls now always visible
+    //this.showControls = false;
+    document.getElementById("switcherbtn").classList.add("hidden");
+
     // skipping start
     if (this.debug) {
       this.player.currentTime = 29;
@@ -401,6 +409,50 @@ export class PlayerComponent implements OnInit {
       );
     }
   }
+
+
+  //
+  enterFullscreen() {
+
+    var videoframe = document.getElementById("video");
+    var fullscreenbtn = document.getElementById("fullscreen");
+
+    if(this.fullscreen == false) {
+
+      this.fullscreen = true;
+
+      videoframe.classList.add("infullscreen");
+      fullscreenbtn.innerHTML = 'fullscreen_exit';
+
+      var elem = document.getElementById("player");
+
+      if (elem.requestFullscreen) {
+        elem.requestFullscreen();
+      } else if (elem.mozRequestFullScreen) { /* Firefox */
+        elem.mozRequestFullScreen();
+      } else if (elem.webkitRequestFullscreen) { /* Chrome, Safari and Opera */
+        elem.webkitRequestFullscreen();
+      } else if (elem.msRequestFullscreen) { /* IE/Edge */
+        elem.msRequestFullscreen();
+      }
+    } else{
+      this.fullscreen = false;
+
+      videoframe.classList.remove("infullscreen");
+      fullscreenbtn.innerHTML = 'fullscreen';
+
+        if (document.exitFullscreen) {
+          document.exitFullscreen();
+        } else if (document.mozCancelFullScreen) { /* Firefox */
+          document.mozCancelFullScreen();
+        } else if (document.webkitExitFullscreen) { /* Chrome, Safari and Opera */
+          document.webkitExitFullscreen();
+        } else if (document.msExitFullscreen) { /* IE/Edge */
+          document.msExitFullscreen();
+        }
+      
+    }
+};
 
   /*
   markCurrentlyPlayingVideo(clickedCam:string){
